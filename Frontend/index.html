@@ -12,7 +12,7 @@
 <style>
   /* Header background color */
   header {
-    background-color: #4b0082; /* Dark purple */
+    background-color: #6182db; /* Dark purple */
     color: white;
     padding: 1em;
   }
@@ -22,14 +22,65 @@
     color: white;
     text-decoration: none;
     padding: 0.5em;
+    margin: 3;
   }
   
   header .nav-link:hover {
     text-decoration: underline;
   }
+  .features h2{
+    text-align: center;
+  }
+  .feature-cards {
+  display: flex;             /* Use Flexbox layout */
+  justify-content: space-around;  /* Space cards evenly */
+  align-items: flex-start;    /* Align items to the top */
+  padding: 20px;              /* Add some padding */
+}
 
+.feature-card {
+  background-color: #f9f9f9; /* Light background for each card */
+  border: 1px solid #ddd;    /* Border around each card */
+  border-radius: 8px;        /* Rounded corners */
+  padding: px;             /* Internal padding for each card */
+  width: 30%;                /* Adjust width to fit 3 cards in a row */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  text-align: center;        /* Center-align text within each card */
+  
+}
+
+.icon {
+  font-size: 2rem;           /* Adjust icon size */
+  margin-bottom: 10px;       /* Space below icon */
+}
+
+.how-it-works h2{
+  text-align: center;
+}
+.steps {
+  display: flex;             /* Use Flexbox layout */
+  justify-content: space-around;  /* Space cards evenly */
+  align-items: flex-start;    /* Align items to the top */
+  padding: 20px;              /* Add some padding */
+}
+
+.step {
+  background-color: #f9f9f9; /* Light background for each card */
+  border: 1px solid #ddd;    /* Border around each card */
+  border-radius: 8px;        /* Rounded corners */
+  padding: px;             /* Internal padding for each card */
+  width: 30%;                /* Adjust width to fit 3 cards in a row */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  text-align: center;        /* Center-align text within each card */
+  
+}
+
+.icon {
+  font-size: 2rem;           /* Adjust icon size */
+  margin-bottom: 10px;       /* Space below icon */
+}
   /* Adjust logo and header alignment */
-  .logo h5 {
+  .logo h4 {
     color: white;
     margin: 0;
   }
@@ -38,13 +89,13 @@
 </head>
 <body>
   <header>
-    <div class="logo"><h5>Publication Summary Tool</h5></div>
+    <div class="logo"><h4>Publications summary tool</h4></div>
     <nav id="navbar">
       <a href="#home" class="nav-link">Home</a>
       <a href="#features" class="nav-link">Features</a>
       <a href="#how-it-works" class="nav-link">How It Works</a>
       <a href="faq.html" class="nav-link">FAQs</a>
-      <a href="signin-page.html" class="nav-link">Login</a>
+      <a href="login.html" class="nav-link">Login</a>
       <a href="signup-page.html" class="nav-link">Sign Up</a>
       <button id="menu-toggle" class="menu-toggle">☰</button>
     </nav>
@@ -65,19 +116,19 @@
   <section class="features" id="features">
     <h2>Why Choose Our Tool?</h2>
     <div class="feature-cards">
-      <div class="feature-card">
+      <div class="feature-card" id="card1">
         <i class="icon">📚</i>
-        <h3>Database Integration</h3>
+        <h4>Database Integration</h4>
         <p>Connects seamlessly with academic databases.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card" id="card2">
         <i class="icon">🤖</i>
-        <h3>AI-Powered Summarization</h3>
+        <h4>AI-Powered Summarization</h4>
         <p>Generate summaries quickly with NLP.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card" id="card3">
         <i class="icon">📄</i>
-        <h3>Customizable Formats</h3>
+        <h4>Customizable Formats</h4>
         <p>Download summaries in multiple formats.</p>
       </div>
     </div>
