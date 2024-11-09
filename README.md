@@ -14,4 +14,10 @@ iii) Superuser: http://192.168.161.163:8000/admin
 html -> templates folder  
 css,js -> static folder
 
+Loading Methods:
+{% load static %}
+<link rel="stylesheet" href="{% static 'theme.css' %}">
+href="{% url 'my_profile_page' %}"
+add requests to urls.py and views.py of the app
+
 

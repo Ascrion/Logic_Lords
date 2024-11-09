@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Output Preview</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme.css">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+  <style>
+    /* Apply the same font as the rest of the page to the dropdown */
+    select {
+      font-family: 'Playfair Display', sans-serif; /* Matching font family */
+      font-size: 16px; /* Ensure it matches the font size of the page */
+      padding: 0.5em; /* Adds padding inside the select dropdown */
+      border: 1px solid black; /* Black border for the dropdown */
+      width: 100%; /* Make it stretch to the container width */
+      box-sizing: border-box; /* Ensures padding is included in width calculation */
+    }
+
+    /* Optional: Style for the button as well */
+    #downloadBtn {
+      background-color: var(--primary-color); /* Customize this based on your theme */
+      color: white;
+      padding: 1em;
+      border: none;
+      cursor: pointer;
+    }
+
+    #downloadBtn:hover {
+      background-color: darken(var(--primary-color), 10%);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">Publication Summary Tool</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="profile-input.html">Profile Input</a>
+      <a href="settings.html">Settings</a>
+      <a href="output-preview.html">Output Preview</a>
+    </nav>
+  </header>
+
+  <!-- Output Preview Section -->
+  <section class="output-preview">
+    <h2>Your Publication Summaries</h2>
+    <p>Below is a preview of the publication summary based on your settings:</p>
+    
+    <!-- Preview Container -->
+    <div id="previewContainer" class="preview-container">
+      <!-- Example Publication Cards will be dynamically added here -->
+    </div>
+
+    <h3>Output Format</h3>
+    <form id="outputFormatForm">
+      <label for="fileFormat">Choose Format:</label>
+      <select id="fileFormat" name="fileFormat">
+        <option value="pdf">PDF</option>
+        <option value="word">Word Document</option>
+        <option value="text">Plain Text</option>
+      </select>
+      
+      <button type="button" id="downloadBtn" class="btn primary">Download Summary</button>
+    </form>
+  </section>
+
+  <!-- JavaScript -->
+  <script src="output-preview.js"></script>
+</body>
+</html>

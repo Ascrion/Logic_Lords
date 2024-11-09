@@ -1,0 +1,267 @@
+/* theme.css */
+:root {
+    --primary-color: #6a0dad; /* Main purple */
+    --secondary-color: #8e44ad; /* Slightly lighter purple */
+    --accent-color: #b784d7; /* Soft accent purple */
+    --background-color: #e6d2f2; /* Light purple background */
+    --text-color: #f3e5f5; /* Light lavender text for dark elements */
+    --text-dark-color: #3a003d; /* Darker text for lighter backgrounds */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-dark-color);
+    font-family: Arial, sans-serif;
+}
+/* General Button Styling */
+.btn {
+    background-color: var(--primary-color) !important; /* Main purple color */
+    color: var(--text-color) !important; /* Light lavender text */
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+/* Header Styling */
+header {
+    background-color: #4b007d; /* Dark, muted purple */
+    color: var(--text-color); /* Light lavender text */
+    padding: 1em;
+    text-align: center;
+}
+
+header nav a {
+    color: var(--text-color);
+    margin: 0 1em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: var(--accent-color); /* Soft accent purple */
+}
+
+.btn:hover {
+    background-color: var(--secondary-color) !important; /* Slightly lighter purple */
+    color: var(--background-color) !important; /* Light purple background */
+}
+
+header {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 1em;
+    text-align: center;
+}
+
+header nav a {
+    color: var(--text-color);
+    margin: 0 1em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: var(--accent-color);
+}
+
+/* Link Styling */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+/* Apply the font globally */
+body {
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Apply the font to specific elements */
+header, .hero, footer {
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 3em 2em;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    color: var(--text-color);
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+}
+
+/* Gradient Animation */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+/* Footer Styling */
+footer {
+    background-color: #2a0033; /* Darkest purple */
+    color: var(--text-color); /* Light lavender text */
+    padding: 1em;
+    text-align: center;
+}
+/* Collaborators Section */
+.collaborators {
+    padding: 2em;
+    text-align: center;
+}
+
+.collaborator-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2em;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.collaborator-card {
+    background-color: #fff; /* White background for each card */
+    color: var(--text-color);
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.collaborator-card:hover {
+    transform: translateY(-10px);
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: var(--text-dark-color);
+    padding: 1em;
+    text-align: center;
+}
+
+.card-body {
+    padding: 1.5em;
+    text-align: left;
+}
+
+.card-body p {
+    margin: 0.5em 0;
+}
+
+.card-footer {
+    padding: 1em;
+    text-align: center;
+}
+
+.connect-btn {
+    background-color: var(--accent-color);
+    color: var(--text-dark-color);
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    margin-top: 1em;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.connect-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+/* No Collaborators Message */
+.no-collaborators-message {
+    padding: 2em;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.2em;
+    text-align: center;
+    color: var(--text-dark-color);
+}
+/* Publication Summary Section */
+.publication-summary {
+    padding: 2em;
+    text-align: center;
+}
+
+.publication-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    margin: auto;
+    max-width: 800px;
+}
+
+.publication-card {
+    background-color: #fff;
+    color: var(--text-color);
+    padding: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.publication-card:hover {
+    transform: translateY(-10px);
+}
+
+.publication-card h3 {
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+.publication-card p {
+    margin: 0.5em 0;
+}
+
+.customization-options {
+    margin-top: 3em;
+    padding: 1.5em;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+}
+
+.customization-options form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.customization-options label {
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+
+.customization-options select {
+    padding: 0.5em;
+    font-size: 1.1em;
+    margin-bottom: 2em;
+}
+
+.download-btn {
+    background-color: var(--accent-color);
+    color: var(--text-dark-color);
+    padding: 1em 2em;
+    border-radius: 5px;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+}
+
+.download-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
