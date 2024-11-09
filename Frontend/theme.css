@@ -1,10 +1,10 @@
 /* theme.css */
 :root {
-    --primary-color: #6a0dad; /* Main purple */
-    --secondary-color: #8e44ad; /* Slightly lighter purple */
-    --accent-color: #b784d7; /* Soft accent purple */
-    --background-color: #e6d2f2; /* Light purple background */
-    --text-color: #f3e5f5; /* Light lavender text for dark elements */
+    --primary-color: white; /* Main purple */
+    --secondary-color: white; /* Slightly lighter purple */
+    --accent-color: white; /* Soft accent purple */
+    --background-color: #a9d8f3; /* Light purple background */
+    --text-color: #3a003d; /* Light lavender text for dark elements */
     --text-dark-color: #3a003d; /* Darker text for lighter backgrounds */
 }
 
@@ -37,14 +37,16 @@ header nav a {
     text-decoration: none;
     font-weight: bold;
 }
-
+header .nav-link:hover {
+    color:#3a003d;
+  }
 header nav a:hover {
     color: var(--accent-color); /* Soft accent purple */
 }
 
 .btn:hover {
-    background-color: var(--secondary-color) !important; /* Slightly lighter purple */
-    color: var(--background-color) !important; /* Light purple background */
+    background-color: #4fa1e3 !important; /* Slightly lighter purple */
+    color: white !important; /* Light purple background */
 }
 
 header {
@@ -88,12 +90,17 @@ header, .hero, footer {
 .hero {
     text-align: center;
     padding: 3em 2em;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
-    color: var(--text-color);
+    /*background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));*/
+    color: #afd2e7;
     background-size: 400% 400%;
-    animation: gradientMove 10s ease infinite;
+    /*animation: gradientMove 10s ease infinite*/;
+    background-image: url('libaryimage.jpg');
+    background-size: cover; /* Makes sure the image covers the whole section */
+    background-position: center center; /* Adjusts image positioning */
 }
-
+#home h3,h1{
+    text-shadow: 2px 2px black;
+} 
 /* Gradient Animation */
 @keyframes gradientMove {
     0% {
@@ -264,4 +271,11 @@ footer {
 .download-btn:hover {
     background-color: var(--primary-color);
     color: var(--text-color);
+}
+
+.foot p{
+    color:white;
+}
+.footer-buttons:hover{
+    color:#4fa1e3;
 }

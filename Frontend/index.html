@@ -12,7 +12,9 @@
 <style>
   /* Header background color */
   header {
-    background-color: #6182db; /* Dark purple */
+    background-color: #4fa1e3; /* Dark purple */
+    border-top-right-radius: 1em;
+    border-top-left-radius: 1em;
     color: white;
     padding: 1em;
   }
@@ -80,16 +82,34 @@
   margin-bottom: 10px;       /* Space below icon */
 }
   /* Adjust logo and header alignment */
-  .logo h4 {
-    color: white;
+  .logo h1 {
+    text-align: center;
+    color: rgb(203, 179, 179);
+    font: Poppins;
+    padding-bottom:0.5em;
     margin: 0;
+  }
+  .cta {
+    text-align: center;
+    padding-bottom: 2em;
+  }
+  .hero {
+    padding-top:1.5em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+  }
+  .hero h1{
+    padding-bottom:0;
+  }
+  .hero h3{
+    padding-top:0;
   }
 </style>
 
 </head>
 <body>
   <header>
-    <div class="logo"><h4>Publications summary tool</h4></div>
+    <div class="logo"><h1>InCite</h1></div>
     <nav id="navbar">
       <a href="#home" class="nav-link">Home</a>
       <a href="#features" class="nav-link">Features</a>
@@ -97,15 +117,14 @@
       <a href="faq.html" class="nav-link">FAQs</a>
       <a href="login.html" class="nav-link">Login</a>
       <a href="signup-page.html" class="nav-link">Sign Up</a>
-      <button id="menu-toggle" class="menu-toggle">☰</button>
     </nav>
   </header>
 
 
   <!-- Hero Section -->
   <section class="hero" id="home">
-    <h1>Effortless Publication Summaries for Faculty Profiles</h1>
-    <p>Summarize, organize, and download your academic publications in one click.</p>
+    <h1 >Effortless Publication Summaries for Faculty Profiles</h1>
+    <h3 >Summarize, organize, and download your academic publications in one click.</h3>
     <div class="hero-buttons">
       <a href="my-profile-page.html" class="btn primary nav-link">Get Started</a>
       <a href="#features" class="btn secondary nav-link">Learn More</a>
@@ -163,9 +182,9 @@
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer class="foot">
     <p>&copy; 2024 Publication Summary Tool. All rights reserved.</p>
-    <nav>
+    <nav class="footer-buttons">
       <a href="#home">Home</a>
       <a href="#features">Features</a>
       <a href="#contact">Contact</a>
