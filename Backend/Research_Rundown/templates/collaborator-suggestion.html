@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborator Suggestions</title>
+    <link rel="stylesheet" href="theme.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        body > main {
+            flex: 1;
+        }
+        footer {
+            margin-top: auto;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+        header {
+            background-color: #3f0e46;
+            color: white;
+            padding: 10px;
+        }
+        header nav {
+            display: flex;
+            justify-content: space-around;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        header nav a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Collaborator Suggestions</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="faculty-profile.html">Faculty Profile</a>
+            <a href="publication-summary.html">Publication Summary</a>
+            <a href="output-preview.html">Output Preview</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="collaborators">
+            <h2>Recommended Collaborators</h2>
+            <p>Based on your recent publications and research areas, here are some suggested collaborators.</p>
+        
+            <div id="collaborator-list" class="collaborator-list">
+                <!-- Collaborator cards will be dynamically injected here -->
+            </div>
+        
+            <div id="no-collaborators-message" class="no-collaborators-message" style="display: none;">
+                <p>No collaborators found based on your research areas and publications.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Automated Publication Summary Tool</p>
+    </footer>
+
+    <script src="collaborator-suggestions.js"></script>
+
+</body>
+</html>

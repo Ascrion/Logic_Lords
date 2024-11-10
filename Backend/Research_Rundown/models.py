@@ -1,5 +1,10 @@
+# models.py
 from django.db import models
 
-class MyModel(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
+class User(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=100)  # Store hashed passwords in production
+
+    def __str__(self):
+        return self.email

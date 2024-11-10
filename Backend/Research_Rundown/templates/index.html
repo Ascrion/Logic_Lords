@@ -1,0 +1,325 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automated Academic Publication Summary Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <style>
+    /* General reset and styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    body {
+      background-color: #f5f8fc;
+      color: #1e3a8a;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      background-color: #1e3a8a;
+      color: white;
+      border-radius: 0 0 15px 15px;
+    }
+
+    .logo h1 {
+      font-size: 3em;
+      font-weight: 700;
+      color: #ffcc00;
+    }
+
+    /* Navbar styling */
+    #navbar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: #f5f5f5;
+      text-decoration: none;
+      font-size: 2em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #ffcc00;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a 40%, #4f82c3);
+      color: white;
+      padding: 50px 30px;
+      text-align: center;
+      border-radius: 15px;
+      margin: 20px;
+    }
+
+    .hero h1 {
+      font-size:2.5em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .hero h3 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1em;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .btn.primary {
+      background-color: #ffcc00;
+      color: #1e3a8a;
+    }
+
+    .btn.primary:hover {
+      background-color: #e6b800;
+    }
+
+    .btn.secondary {
+      background-color: #ffffff;
+      color: #1e3a8a;
+      border: 2px solid #ffcc00;
+    }
+
+    .btn.secondary:hover {
+      background-color: #e0e0e0;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 50px 30px;
+      background-color: #ffffff;
+      color: #1e3a8a;
+      border-radius: 15px;
+      margin: 20px;
+    }
+
+    .features h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .feature-cards {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .feature-card {
+      background-color: #f5f8fc;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      padding: 20px;
+      width: 30%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .feature-card i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #ffcc00;
+    }
+
+    /* How It Works Section */
+    .how-it-works {
+      padding: 50px 30px;
+      background-color: #1e3a8a;
+      color: white;
+      border-radius: 15px;
+      margin: 20px;
+    }
+
+    .how-it-works h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .step {
+      background-color: #f5f8fc;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      padding: 20px;
+      width: 30%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      color: #1e3a8a;
+    }
+
+    .step i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #ffcc00;
+    }
+
+    /* Call to Action Section */
+    .cta {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: space-between;
+      padding: 20px 30px;
+      background-color: #4f82c3;
+      color: white;
+      border-radius: 15px;
+      margin: 20px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1e3a8a;
+      color: white;
+      border-radius: 15px 15px 0 0;
+      margin-top: 20px;
+    }
+
+    #btn1{
+      margin-top: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      #navbar {
+        display: none;
+        flex-direction: column;
+        background-color: #1e3a8a;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .show-menu #navbar {
+        display: flex;
+      }
+
+      .feature-card, .step {
+        width: 90%;
+      }
+
+      #btn1{
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><h1>InCite</h1></div>
+    <nav id="navbar">
+      <a href="{% url 'index' %}" class="nav-link">Home</a>
+      <a href="{% url 'login' %}" class="nav-link">Login</a>
+      <a href="{% url 'signup-page' %}" class="nav-link">Sign Up</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <h1>Effortless Summaries and Organization for Academic Publicationss</h1>
+    <h3>Summarize, organize, collaborate and download your academic publications in one click.</h3>
+    <div class="hero-buttons">
+      <a href="{% url 'signup-page' %}" class="btn primary nav-link">Get Started</a>
+      <a href="{% url 'faq' %}" class="btn secondary nav-link">Learn More</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2>Why Choose Our Tool?</h2>
+    <div class="feature-cards">
+      <div class="feature-card" id="card1">
+        <i class="icon">📚</i>
+        <h4>Database Integration</h4>
+        <p>Connects seamlessly with academic databases.</p>
+      </div>
+      <div class="feature-card" id="card2">
+        <i class="icon">🤖</i>
+        <h4>AI-Powered Summarization</h4>
+        <p>Generate summaries quickly with NLP.</p>
+      </div>
+      <div class="feature-card" id="card3">
+        <i class="icon">📄</i>
+        <h4>Customizable Formats</h4>
+        <p>Download summaries in multiple formats.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works" id="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <i class="icon">👤</i>
+        <h3>Step 1</h3>
+        <p>Input Your Information</p>
+      </div>
+      <div class="step">
+        <i class="icon">⚙️</i>
+        <h3>Step 2</h3>
+        <p>Choose Output Preferences</p>
+      </div>
+      <div class="step">
+        <i class="icon">⬇️</i>
+        <h3>Step 3</h3>
+        <p>Download Summaries</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="cta">
+    <h2>Ready to Simplify Your Publications?</h2>
+    <a href="{% url 'signup-page' %}" class="btn primary nav-link" id ="btn1">Get Started Now</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <p>&copy; 2024 Publication Summary Tool. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Profile Input</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme.css">
+  
+  <style>
+    /* Mobile responsiveness */
+@media (max-width: 768px) {
+    .profile-input {
+        padding: 1em;  /* Reduce padding on smaller screens */
+    }
+    .year-range-container {
+        flex-direction: column; /* Stack inputs vertically on smaller screens */
+    }
+    .year-range-container input {
+        width: 100%; /* Make inputs full width on smaller screens */
+    }
+}
+
+    /* Ensure all form inputs use the same font as the rest of the page */
+    input, textarea, select {
+      font-family: 'Playfair Display', sans-serif; /* This will match the font style */
+      font-size: 16px; /* Adjust if needed */
+      border: 1px solid black; /* Adds black border */
+      padding: 0.5em; /* Adds padding inside the input boxes */
+      margin-bottom: 1em; /* Adds spacing between form elements */
+      width: 100%; /* Makes the inputs take up full width (optional) */
+      box-sizing: border-box; /* Includes padding in the width calculation */
+    }
+    
+    /* Textareas and select fields also get similar styling */
+    textarea {
+      resize: vertical; /* Allows vertical resizing of the textarea */
+    }
+
+    /* Style the submit button */
+    button[type="submit"] {
+      background-color: var(--primary-color); /* Customize this based on your theme */
+      color: white;
+      padding: 1em;
+      border: none;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: darken(var(--primary-color), 10%);
+    }
+
+    /* Add styling to the form container */
+    .profile-input {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2em;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Add some space around the form */
+    .profile-input h2 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+
+    /* Styling for labels */
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+    /* Add this to your existing styles */
+.year-range-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Adjust gap as needed */
+}
+
+/* Ensure the inputs in the container are the same width */
+input[type="number"] {
+    width: 48%; /* Adjust width if necessary */
+}
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">Publication Summary Tool</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="profile-input.html">Faculty Profile Input</a>
+      <a href="features.html">Features</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <!-- Faculty Profile Input Section -->
+  <section class="profile-input">
+    <h2>Faculty Profile Input</h2>
+    <p>Please enter your details to set up your profile and customize your summary preferences.</p>
+    
+    <form id="facultyForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="academicID">Academic ID</label>
+      <input type="text" id="academicID" name="academicID" required>
+
+      <label for="department">Department</label>
+      <input type="text" id="department" name="department" required>
+
+      <label for="researchInterests">Research Interests</label>
+      <textarea id="researchInterests" name="researchInterests" rows="3"></textarea>
+
+      <label for="database">Preferred Database</label>
+      <select id="database" name="database" required>
+        <option value="googleScholar">Google Scholar</option>
+        <option value="dblp">DBLP</option>
+      </select>
+
+      <label for="outputFormat">Preferred Output Format</label>
+      <select id="outputFormat" name="outputFormat" required>
+        <option value="pdf">PDF</option>
+        <option value="word">Word</option>
+        <option value="bibTex">BibTeX</option>
+      </select>
+
+      <label for="yearRange">Publication Year Range</label>
+<div class="year-range-container">
+    <input type="number" id="yearStart" name="yearStart" placeholder="From" required>
+    <input type="number" id="yearEnd" name="yearEnd" placeholder="To" required>
+</div>
+
+
+      <button type="submit" class="btn primary">Submit</button>
+    </form>
+  </section>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

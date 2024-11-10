@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f5f8fc;
+      color: #1e3a8a;
+    }
+
+    .signup-container {
+      width: 100%;
+      max-width: 400px;
+      padding: 30px;
+      background-color: #ffffff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin: 10px 0 5px;
+      font-size: 14px;
+      color: #1e3a8a;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #ffcc00;
+      color: #1e3a8a;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e6b800;
+    }
+
+    .login-link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .login-link a {
+      color: #ffcc00;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .login-link a:hover {
+      color: #e6b800;
+    }
+
+    .alert-box {
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .alert-box.error {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    .alert-box.success {
+      background-color: #4CAF50;
+      color: white;
+    }
+    #temp{
+      color: #d5aa2b;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Sign Up</h2>
+    
+    <!-- Display messages -->
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <div class="alert-box {{ message.tags }}" role="alert">
+            <p>{{ message }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+    <form id="signupForm" method="POST" action="{% url 'signup-page' %}" onsubmit="return validateForm()">
+      {% csrf_token %}
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter a password" required minlength="6">
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+      
+      <button type="submit">Sign Up</button>
+    </form>
+    <p class="login-link">Already have an account? <a href="{% url 'login' %}" id="temp">Login</a></p>
+  </div>
+  <script src="{% static 'js/signup-page.js' %}"></script>
+</body>
+</html>
