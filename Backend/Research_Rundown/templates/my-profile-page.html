@@ -3,231 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Profile</title>
+  <title>Upload PDF and Extract Text</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
+    /* Styling for the page layout */
     body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      font-family: Arial, sans-serif;
       background-color: #f4f4f9;
       color: #333;
-    }
-
-    header {
-      background-color: #007bff;
-      color: #fff;
-      padding: 1em;
-      text-align: left;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.5em;
-    }
-
-    header button {
-      background-color: #0056b3;
-      border: none;
-      color: #fff;
-      padding: 0.5em 1em;
-      font-size: 1em;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    header button:hover {
-      background-color: #003f7f;
-    }
-
-    .profile-container {
-      flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       padding: 2em;
-      gap: 2em;
     }
 
-    .user-details {
+    .container {
+      width: 80%;
+      max-width: 600px;
+      background-color: #fff;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       text-align: center;
+    }
+
+    h3 {
+      color: #007bff;
       font-size: 1.5em;
-      padding: 2em;
-      background-color: #fff;
-      width: 80%;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .user-details h3 {
-      color: #007bff;
-      font-size: 2em;
       margin-bottom: 1em;
     }
 
-    .upload-section, .previous-uploads {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5em;
-      width: 80%;
-      padding: 2em;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    form {
+      margin-bottom: 2em;
     }
 
-    .upload-section h3, .previous-uploads h3 {
-      color: #007bff;
-      font-size: 2em;
-      margin-bottom: 1em;
-    }
-
-    .upload-section input[type="file"] {
-      font-size: 1.1em;
-      width: 100%;
-      padding: 0.8em;
+    input[type="file"] {
+      font-size: 1em;
+      padding: 0.5em;
       border: 1px solid #ccc;
       border-radius: 5px;
+      width: 100%;
       cursor: pointer;
     }
 
-    .upload-section button {
-      width: 100%;
-      padding: 0.8em;
+    button {
       font-size: 1.2em;
+      padding: 0.8em;
       background-color: #007bff;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      margin-top: 1em;
     }
 
-    .upload-section button:hover {
+    button:hover {
       background-color: #0056b3;
     }
 
-    /* Previous Uploads Grid Layout */
-    .pdf-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5em;
-      width: 100%;
-    }
-
-    .pdf-item {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 1em;
+    .extracted-text {
+      text-align: left;
+      margin-top: 2em;
       background-color: #f9f9f9;
+      padding: 1em;
       border: 1px solid #ddd;
       border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      height: 100px;
-    }
-
-    .pdf-item .pdf-name {
-      font-size: 1.1em;
-      color: #333;
-    }
-
-    .pdf-item .pdf-date {
-      font-size: 0.9em;
-      color: #666;
-    }
-
-    #home{
-      color: white;
-      border: #fff;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
 </head>
 <body>
-  <header>
-    <h2>User Profile</h2>
-    <a href="{% url 'index' %}" id="home" class="nav-link">Home</a>
-  </header>
+  <div class="container">
+    <h3>Upload PDF to Extract Text</h3>
+    <form id="pdfUploadForm">
+      <input type="file" id="pdfFile" accept="application/pdf">
+      <button type="button" onclick="extractText()">Upload and Extract Text</button>
+    </form>
 
-  <div class="profile-container">
-    <!-- User Details Section -->
-    <div class="user-details">
-      <h3>User:</h3>
-      <p>Email: {{ user.email }}</p>
-    </div>
-
-    <!-- PDF Upload Section -->
-    <div class="upload-section">
-      <h3>Upload Publications</h3>
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Upload</button>
-      </form>>
-    </div>
-
-    <!-- Previous Uploads Section with Grid Layout -->
-    <div class="previous-uploads">
-      <h3>Previous Uploads</h3>
-      <div class="pdf-list" id="pdfList">
-        <!-- Placeholder for uploaded PDFs -->
-      </div>
+    <div id="extractedTextContainer" class="extracted-text" style="display:none;">
+      <h3>Extracted Text from PDF:</h3>
+      <pre id="extractedText"></pre>
+      <!-- Button to send the extracted text to the server -->
+      <button onclick="saveTextToServer()">Save to Server</button>
     </div>
   </div>
 
   <script>
-    const pdfList = [
-      { name: 'Sample PDF 1', date: '2023-01-01' },
-      { name: 'Sample PDF 2', date: '2023-02-15' },
-      { name: 'Sample PDF 3', date: '2023-03-20' },
-      { name: 'Sample PDF 4', date: '2023-04-10' },
-      { name: 'Sample PDF 5', date: '2023-05-30' }
-    ];
+    async function extractText() {
+      const fileInput = document.getElementById('pdfFile');
+      const extractedTextContainer = document.getElementById('extractedTextContainer');
+      const extractedTextElement = document.getElementById('extractedText');
 
-    function uploadPDF() {
-      const fileInput = document.getElementById('pdfUpload');
-      const fileInfoDiv = document.getElementById('fileInfo');
+      if (!fileInput.files.length) {
+        alert('Please select a PDF file to upload.');
+        return;
+      }
 
-      if (fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        const uploadDate = new Date().toLocaleDateString();
-        pdfList.push({ name: file.name, date: uploadDate });
+      const file = fileInput.files[0];
 
-        fileInfoDiv.innerHTML = `<p><strong>Uploaded PDF:</strong> ${file.name}</p>`;
-        renderPDFList();
-      } else {
-        fileInfoDiv.innerHTML = "<p>No file uploaded.</p>";
+      if (typeof pdfjsLib === 'undefined') {
+        alert('PDF.js library is not loaded.');
+        return;
+      }
+
+      try {
+        const pdf = await pdfjsLib.getDocument(URL.createObjectURL(file)).promise;
+        let extractedText = '';
+        
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+          const page = await pdf.getPage(pageNum);
+          const textContent = await page.getTextContent();
+
+          textContent.items.forEach(item => {
+            extractedText += item.str + ' ';
+          });
+
+          extractedText += '\n\n'; // Separate pages by double newlines
+        }
+
+        extractedTextElement.textContent = extractedText;
+        extractedTextContainer.style.display = 'block';
+      } catch (error) {
+        console.error('Error extracting text:', error);
+        alert('Failed to extract text from the PDF. Make sure the PDF.js library is loaded.');
       }
     }
 
-    function renderPDFList() {
-      const pdfListDiv = document.getElementById('pdfList');
-      pdfListDiv.innerHTML = ''; // Clear existing content
+    function saveTextToServer() {
+      const extractedText = document.getElementById('extractedText').textContent;
 
-      pdfList.forEach((pdf) => {
-        const pdfItem = document.createElement('div');
-        pdfItem.className = 'pdf-item';
+      if (!extractedText) {
+        alert("No text available to save.");
+        return;
+      }
 
-        pdfItem.innerHTML = `
-          <div class="pdf-name">${pdf.name}</div>
-          <div class="pdf-date">Uploaded: ${pdf.date}</div>
-        `;
-
-        pdfListDiv.appendChild(pdfItem);
+      // Send extracted text to the server using AJAX
+      fetch('/save_text/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': '{{ csrf_token }}'  // Ensure to use Django's CSRF token
+        },
+        body: new URLSearchParams({ text: extractedText })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          alert('Text saved successfully on the server.');
+        } else {
+          alert(`Error: ${data.message}`);
+        }
+      })
+      .catch(error => {
+        console.error('Error saving text:', error);
+        alert('Failed to save text to the server.');
       });
     }
-
-    // Initial render with sample data
-    renderPDFList();
   </script>
+
+  <!-- Include the PDF.js library for in-browser PDF processing -->
+  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
 </body>
 </html>
