@@ -84,8 +84,8 @@
     <div id="extractedTextContainer" class="extracted-text" style="display:none;">
       <h3>Extracted Text from PDF:</h3>
       <pre id="extractedText"></pre>
-      <!-- Button to send the extracted text to the server -->
-      <button onclick="saveTextToServer()">Save to Server</button>
+      <!-- Button to download the extracted text as a .txt file -->
+      <button onclick="downloadTextFile()">Download as Text File</button>
     </div>
   </div>
 
@@ -130,35 +130,26 @@
       }
     }
 
-    function saveTextToServer() {
+    function downloadTextFile() {
       const extractedText = document.getElementById('extractedText').textContent;
 
       if (!extractedText) {
-        alert("No text available to save.");
+        alert("No text available to download.");
         return;
       }
 
-      // Send extracted text to the server using AJAX
-      fetch('/save_text/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'X-CSRFToken': '{{ csrf_token }}'  // Ensure to use Django's CSRF token
-        },
-        body: new URLSearchParams({ text: extractedText })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'success') {
-          alert('Text saved successfully on the server.');
-        } else {
-          alert(`Error: ${data.message}`);
-        }
-      })
-      .catch(error => {
-        console.error('Error saving text:', error);
-        alert('Failed to save text to the server.');
-      });
+      // Create a Blob from the extracted text
+      const blob = new Blob([extractedText], { type: 'text/plain' });
+
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'extracted_text.txt';  // Filename for the download
+
+      // Append link to the body, trigger click, and remove link
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   </script>
 
