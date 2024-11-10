@@ -1,5 +1,7 @@
-# text_analysis/forms.py
 from django import forms
+from .models import UserFiles
 
-class TextUploadForm(forms.Form):
-    text_file = forms.FileField()
+class FileUploadForm(forms.ModelForm):
+    class Meta:
+        model = UserFiles
+        fields = ['name']  # Only include fields that actually exist in the UserFiles model

@@ -3,15 +3,231 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ user.username }}'s Profile</title>
-  <link rel="stylesheet" href="{% static 'profile.css' %}">
+  <title>User Profile</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 1em;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.5em;
+    }
+
+    header button {
+      background-color: #0056b3;
+      border: none;
+      color: #fff;
+      padding: 0.5em 1em;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    header button:hover {
+      background-color: #003f7f;
+    }
+
+    .profile-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2em;
+      gap: 2em;
+    }
+
+    .user-details {
+      text-align: center;
+      font-size: 1.5em;
+      padding: 2em;
+      background-color: #fff;
+      width: 80%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-details h3 {
+      color: #007bff;
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+
+    .upload-section, .previous-uploads {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5em;
+      width: 80%;
+      padding: 2em;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .upload-section h3, .previous-uploads h3 {
+      color: #007bff;
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+
+    .upload-section input[type="file"] {
+      font-size: 1.1em;
+      width: 100%;
+      padding: 0.8em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .upload-section button {
+      width: 100%;
+      padding: 0.8em;
+      font-size: 1.2em;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .upload-section button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Previous Uploads Grid Layout */
+    .pdf-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5em;
+      width: 100%;
+    }
+
+    .pdf-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1em;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      height: 100px;
+    }
+
+    .pdf-item .pdf-name {
+      font-size: 1.1em;
+      color: #333;
+    }
+
+    .pdf-item .pdf-date {
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    #home{
+      color: white;
+      border: #fff;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h2>User Profile</h2>
+    <a href="{% url 'index' %}" id="home" class="nav-link">Home</a>
+  </header>
+
   <div class="profile-container">
-    <h1>Welcome, {{ user.username }}!</h1>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Full Name:</strong> {{ user.get_full_name }}</p>
-    <p><strong>Join Date:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+    <!-- User Details Section -->
+    <div class="user-details">
+      <h3>User:</h3>
+      <p>Email: {{ user.email }}</p>
+    </div>
+
+    <!-- PDF Upload Section -->
+    <div class="upload-section">
+      <h3>Upload Publications</h3>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+      </form>>
+    </div>
+
+    <!-- Previous Uploads Section with Grid Layout -->
+    <div class="previous-uploads">
+      <h3>Previous Uploads</h3>
+      <div class="pdf-list" id="pdfList">
+        <!-- Placeholder for uploaded PDFs -->
+      </div>
+    </div>
   </div>
+
+  <script>
+    const pdfList = [
+      { name: 'Sample PDF 1', date: '2023-01-01' },
+      { name: 'Sample PDF 2', date: '2023-02-15' },
+      { name: 'Sample PDF 3', date: '2023-03-20' },
+      { name: 'Sample PDF 4', date: '2023-04-10' },
+      { name: 'Sample PDF 5', date: '2023-05-30' }
+    ];
+
+    function uploadPDF() {
+      const fileInput = document.getElementById('pdfUpload');
+      const fileInfoDiv = document.getElementById('fileInfo');
+
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const uploadDate = new Date().toLocaleDateString();
+        pdfList.push({ name: file.name, date: uploadDate });
+
+        fileInfoDiv.innerHTML = `<p><strong>Uploaded PDF:</strong> ${file.name}</p>`;
+        renderPDFList();
+      } else {
+        fileInfoDiv.innerHTML = "<p>No file uploaded.</p>";
+      }
+    }
+
+    function renderPDFList() {
+      const pdfListDiv = document.getElementById('pdfList');
+      pdfListDiv.innerHTML = ''; // Clear existing content
+
+      pdfList.forEach((pdf) => {
+        const pdfItem = document.createElement('div');
+        pdfItem.className = 'pdf-item';
+
+        pdfItem.innerHTML = `
+          <div class="pdf-name">${pdf.name}</div>
+          <div class="pdf-date">Uploaded: ${pdf.date}</div>
+        `;
+
+        pdfListDiv.appendChild(pdfItem);
+      });
+    }
+
+    // Initial render with sample data
+    renderPDFList();
+  </script>
 </body>
 </html>
